@@ -1,0 +1,20 @@
+# base
+django<1.9
+south
+
+# for development
+git+https://github.com/pashinin/fabric@6783d2f7ad7a449c97cd1ee0df9a2dbc29422fce#egg=fabric
+pytz
+ipython
+coverage
+sphinx
+sphinx_rtd_theme
+celery
+babel
+django-rq
+django-modeltranslation
+django-debug-toolbar
+
+# requirements
+python-slugify
+django-mptt
