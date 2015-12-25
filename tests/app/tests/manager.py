@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from ..manager import BaseManager
+from mtr.utils.manager import BaseManager
 
 manager = BaseManager()
 
@@ -75,7 +75,7 @@ class ManagerTest(TestCase):
 
         self.assertEqual(self.manager.get('request', 'handler')(4), 16)
 
-        self.manager.import_modules(('mtr.utils.tests.testmodule:manager',))
+        self.manager.import_modules(('app.tests.testmodule:manager',))
 
         self.assertIn('item', self.manager._registered.keys())
         self.assertIn('request', self.manager._registered.keys())
