@@ -20,8 +20,9 @@ setup(
     author='mtr group',
     author_email='inboxmtr@gmail.com',
     url='https://github.com/mtrgroup/django-mtr-utils',
-    description="",
+    description=README,
     long_description=README,
+    namespace_packages=('mtr',),
     classifiers=[
         'Framework :: Django',
         'License :: OSI Approved :: MIT License',
