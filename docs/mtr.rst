@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    mtr.sphinx
     mtr.utils
 
 Module contents
