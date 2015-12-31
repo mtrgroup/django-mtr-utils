@@ -7,6 +7,8 @@ import django
 from fabric.api import local, task, lcd, settings
 from babel.messages.pofile import read_po, write_po
 
+from mtr.fabric.local import clear, subl
+
 APPS = []
 PROJECT_APPS = ['app']
 PROJECT_DIR = 'tests'
@@ -18,16 +20,6 @@ def lreplace(pattern, sub, string):
     if 'pattern' starts 'string'."""
 
     return re.sub('^%s' % pattern, sub, string)
-
-
-@task
-def clear():
-    """Delete unnecessary and cached files"""
-
-    local(
-        "find . -name '~*' -or -name '*.pyo' -or -name '*.pyc' "
-        "-or -name '__pycache__' -or -name 'Thubms.db' "
-        "| xargs -I {} rm -vrf '{}'")
 
 
 @task
@@ -134,15 +126,6 @@ def locale(action='make', lang='en'):
 
 
 @task
-def install():
-    """Install packages for testing"""
-
-    with lcd(PROJECT_DIR):
-        local('pip install -r requirements/python{}.txt'.format(
-            sys.version_info[0]))
-
-
-@task
 def migrate():
     """Simple data migration management"""
 
@@ -187,13 +170,6 @@ def recreate(username='app', password='app'):
 
 
 @task
-def subl():
-    """Start Sublime editor"""
-
-    local('subl project.sublime-project')
-
-
-@task
 def docs(action='make'):
     """Sphinx docs generation"""
 
@@ -207,3 +183,12 @@ def docs(action='make'):
             print(
                 'Invalid action: {}, available actions: "make"'
                 ', "update"'.format(action))
+
+
+@task
+def install():
+    """Install packages for testing"""
+
+    with lcd(PROJECT_DIR):
+        local('pip install -r requirements/python{}.txt'.format(
+            sys.version_info[0]))
