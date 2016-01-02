@@ -10,7 +10,6 @@ def read(fname):
 
 README = read('README.md')
 
-version_tuple = VERSION
 version = get_version()
 
 setup(
@@ -23,6 +22,7 @@ setup(
     description=README,
     long_description=README,
     namespace_packages=('mtr',),
+    zip_safe=False,
     classifiers=[
         'Framework :: Django',
         'License :: OSI Approved :: MIT License',
