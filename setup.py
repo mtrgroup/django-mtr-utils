@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 import os
 
-from mtr.utils import VERSION, get_version
+from mtr.utils import get_version
 
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+def read(name):
+    return open(os.path.join(os.path.dirname(__file__), name)).read()
 
 README = read('README.md')
 
@@ -23,6 +23,7 @@ setup(
     long_description=README,
     namespace_packages=('mtr',),
     zip_safe=False,
+    include_package_data=True,
     classifiers=[
         'Framework :: Django',
         'License :: OSI Approved :: MIT License',
