@@ -8,6 +8,36 @@ from mptt.managers import TreeManager
 from .translation import _
 
 
+class AutoLabeledDecimalFields:
+    # TODO: make any field, types
+
+    _ = _
+
+    DEFAULT_PARAMS = {
+        'blank': True,
+        'null': True,
+        'max_digits': 10,
+        'decimal_places': 2
+    }
+
+    def __new__(cls, *fields, **newparams):
+        labels = map(lambda f: f.replace('_', ' '), fields)
+        params = cls.DEFAULT_PARAMS
+        params.update(newparams)
+
+        class DecimalFieldsMixin(models.Model):
+
+            class Meta:
+                abstract = True
+
+        for field, label in zip(fields, labels):
+            params['verbose_name'] = _(label)
+            DecimalFieldsMixin.add_to_class(
+                field, models.DecimalField(**params))
+
+        return DecimalFieldsMixin
+
+
 class CharNullField(models.CharField):
     description = "CharField that stores NULL but returns empty string"
     __metaclass__ = models.SubfieldBase
