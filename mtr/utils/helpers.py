@@ -1,4 +1,5 @@
 import os
+import re
 import collections
 
 from functools import wraps
@@ -159,3 +160,10 @@ def url_with_media(path):
     """Return url with domain in settings for inner functions"""
 
     return urljoin(MEDIA_URL, path.lstrip('/'))
+
+
+def lreplace(pattern, sub, string):
+    """Replaces 'pattern' in 'string' with 'sub'
+    if 'pattern' starts 'string'."""
+
+    return re.sub('^%s' % pattern, sub, string)
