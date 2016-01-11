@@ -7,7 +7,7 @@ from fabric.api import local, task, lcd, settings
 from babel.messages.pofile import read_po, write_po
 
 from mtr.fabric.local import clear, subl
-from mtr.utils.helpers import lreplace
+from mtr.utils.basic import lreplace
 
 APPS = []
 PROJECT_APPS = ['app']
