@@ -33,6 +33,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    keywords=['django', 'helpers', 'mixins', 'shortcuts'],
-    install_requires=['python-slugify'],
+    keywords=('django', 'helpers', 'mixins', 'shortcuts'),
+    install_requires=('python-slugify', 'django-mptt'),
+    dependency_links=('git+https://github.com/mtrgroup/django-pure-pagination#egg=django-pure-pagination@master#egg=django-pure-pagination',),
 )
