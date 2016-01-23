@@ -23,7 +23,7 @@ Includes only docstrings from module [http://django-mtr-utils.rtfd.org/](http://
 - Supports: Django 1.6-1.9+ Python 2.7, 3.3+
 
 ## Working on
+- Tests !!!
 - Documentation
-- Tests
 - Rewrite paginator without 3-rd party lib
 
