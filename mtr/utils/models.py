@@ -9,20 +9,21 @@ from .translation import _
 
 
 class ManyFields:
-    # TODO: make any field, types
-
     _ = _
 
-    DEFAULT_PARAMS = {
+    DEFAULT_DECIMAL_PARAMS = {
         'blank': True,
         'null': True,
         'max_digits': 10,
         'decimal_places': 2
     }
 
-    def __new__(cls, *fields, **newparams):
+    def __new__(cls, _field, *fields, **newparams):
         labels = map(lambda f: f.replace('_', ' '), fields)
-        params = cls.DEFAULT_PARAMS
+        params = {}
+
+        if _field is models.DecimalField:
+            params.update(cls.DEFAULT_DECIMAL_PARAMS)
         params.update(newparams)
 
         class ManyFieldsMixin(models.Model):
@@ -33,7 +34,7 @@ class ManyFields:
         for field, label in zip(fields, labels):
             params['verbose_name'] = _(label)
             ManyFieldsMixin.add_to_class(
-                field, models.DecimalField(**params))
+                field, _field(**params))
 
         return ManyFieldsMixin
 
