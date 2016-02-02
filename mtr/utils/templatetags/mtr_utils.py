@@ -5,9 +5,10 @@ from django.conf import settings
 from django.utils.formats import get_format
 from django.utils.translation import get_language
 
-from ..helpers import chunks as chunks_helper
+from ..helpers import chunks as chunks_helper, in_group_plain
 
 register = template.Library()
+
 
 @register.simple_tag
 def settings_value(name):
@@ -70,7 +71,7 @@ def get(item, key):
 
 @register.filter
 def in_group(user, group):
-    return group in list(map(lambda g: g.name, user.groups.all()))
+    return in_group_plain(user, group)
 
 
 @register.filter

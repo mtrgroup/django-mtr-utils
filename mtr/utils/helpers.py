@@ -107,7 +107,7 @@ def model_settings(model, name):
     return getattr(getattr(model, 'Settings', {}), name, {})
 
 
-def in_group_plain(name, user):
+def in_group_plain(user, name):
     """Check user name if listed in groups"""
 
     return name in list(map(lambda g: g.name, user.groups.all()))
@@ -120,7 +120,7 @@ def in_group(name):
 
         @wraps(f)
         def wrapper(request, *args, **kwargs):
-            if in_group_plain(name, request.user):
+            if in_group_plain(request.user, name):
                 return f(request, *args, **kwargs)
             else:
                 raise PermissionDenied
