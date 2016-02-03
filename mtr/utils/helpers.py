@@ -21,10 +21,14 @@ def themed(template, version_subdirectory=False, settings=THEMES):
     if version_subdirectory:
         path = os.path.join(path, django.get_version()[:3])
 
+    # TODO: add check if file exist if not try use base theme
+    # if base not found use fall back, then raise error with original
+    # template provided in function
+
     return os.path.join(path, template)
 
 
-def render_to(template, *args, **kwargs):
+def render_to(template, *args, themed=True, **kwargs):
     """Shortuct for rendering templates,
     creates functions that returns decorator for view"""
 

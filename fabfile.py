@@ -19,7 +19,7 @@ DOCS_DIR = 'docs'
 def manage(command, prefix=None):
     """Shortcut for manage.py file"""
 
-    run = 'manage.py {}'
+    run = './manage.py {}'
 
     if prefix:
         run = '{} {}'.format(prefix, run)
