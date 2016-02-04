@@ -28,7 +28,7 @@ def themed(template, version_subdirectory=False, settings=THEMES):
     return os.path.join(path, template)
 
 
-def render_to(template, *args, themed=True, **kwargs):
+def render_to(template, *args, **kwargs):
     """Shortuct for rendering templates,
     creates functions that returns decorator for view"""
 

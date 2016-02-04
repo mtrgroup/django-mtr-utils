@@ -16,17 +16,19 @@ DOCS_DIR = 'docs'
 
 
 @task
-def manage(command, prefix=None):
+def manage(command, coverage=None):
     """Shortcut for manage.py file"""
 
     run = './manage.py {}'
 
-    if prefix:
-        run = '{} {}'.format(prefix, run)
+    if coverage:
+        run = '{} {}'.format(coverage, run)
 
     with lcd(PROJECT_DIR):
         local(run.format(command))
-        local('mv .coverage ../')
+
+        if coverage:
+            local('mv .coverage ../')
 
 
 @task
@@ -47,7 +49,7 @@ def test(coverage=False):
             "*migrations/*.py,*tests*,*/admin.py," \
             "*templatetags/*.py,*utils/*.py"
 
-    manage(command, prefix=coverage)
+    manage(command, coverage)
 
 
 @task
