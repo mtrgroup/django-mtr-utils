@@ -4,7 +4,7 @@
 
 ### Inlcudes Model mixins, helpers, shortcuts, pagination classes, decorators
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/build-status/master) [![Documentation Status](https://readthedocs.org/projects/django-mtr-utils/badge/?version=latest)](https://readthedocs.org/projects/django-mtr-utils/?badge=latest)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mtrgroup/django-mtr-utils/?branch=master) [![Build Status](https://travis-ci.org/mtrgroup/django-mtr-utils.svg?branch=master)](https://travis-ci.org/mtrgroup/django-mtr-utils) [![Documentation Status](https://readthedocs.org/projects/django-mtr-utils/badge/?version=latest)](https://readthedocs.org/projects/django-mtr-utils/?badge=latest)
 
 Project updates here [http://mtr.website](http://mtr.website)
 
