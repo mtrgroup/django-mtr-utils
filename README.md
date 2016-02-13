@@ -16,7 +16,7 @@ Includes only docstrings from module [http://django-mtr-utils.rtfd.org/](http://
 1. Install package:
    `pip install git+https://github.com/mtrgroup/django-mtr-utils.git`
 2. Add `mtr.utils` to `INSTALLED_APPS` in your settings file for templatetags
-3. Migrate models `./manage.py migrate`
+3. Import what you want in your project
 
 ## Features
 - Gettext prefixed strings
