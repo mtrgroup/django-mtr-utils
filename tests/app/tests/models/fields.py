@@ -8,9 +8,6 @@ from mtr.utils.translation import _
 
 class ManyFieldsTest(TestCase):
 
-    # def setUp(self):
-        # self.manager = Base
-
     def test_char_fields(self):
         CharFieldsMixin = ManyFields(
             models.CharField, ('name', _('name')))
