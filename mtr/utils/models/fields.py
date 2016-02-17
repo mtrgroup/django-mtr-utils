@@ -3,7 +3,7 @@ from django.db import models
 from ..translation import _
 
 
-class ManyFields:
+class ManyFields(object):
 
     def __new__(cls, _field, *fields_and_labels, **params):
         class ManyFieldsMixin(models.Model):
@@ -19,7 +19,7 @@ class ManyFields:
         return ManyFieldsMixin
 
 
-class ManyFieldsAuto:
+class ManyFieldsAuto(object):
     _ = _
 
     def __new__(cls, _field, *fields, **newparams):
