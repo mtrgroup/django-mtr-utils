@@ -20,9 +20,8 @@ class ViewsCountMixin(models.Model):
         if ip not in ips:
             ips.append(ip)
 
-            # TODO: use F()
             self.views_ips = ips
-            self.views_count += 1
+            self.views_count = models.F('views_count') + 1
             self.save(update_fields=['views_ips', 'views_count'])
 
 
