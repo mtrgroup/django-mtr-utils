@@ -89,7 +89,7 @@ class CreatedAtUpdatedAtMixin(models.Model):
 
 
 class PositionRootMixin(models.Model):
-    position = models.PositiveIntegerField(
+    position = models.BigIntegerField(
         _('position'), null=True, blank=True, default=-1)
 
     class Meta:
@@ -109,7 +109,7 @@ class PositionRootMixin(models.Model):
 class PositionRelatedMixin(models.Model):
     POSITION_RELATED_FIELD = None
 
-    position = models.PositiveIntegerField(
+    position = models.BigIntegerField(
         _('position'), null=True, blank=True, default=-1)
 
     class Meta:
