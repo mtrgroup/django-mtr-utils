@@ -7,6 +7,7 @@ import django
 
 from django.db import models
 from django.shortcuts import render
+from django.utils.six.moves import filterfalse
 from django.utils.six.moves.urllib.parse import urljoin
 from django.core.exceptions import PermissionDenied
 
@@ -163,3 +164,19 @@ def url_with_media(path):
     """Return url with domain in settings for inner functions"""
 
     return urljoin(MEDIA_URL, path.lstrip('/'))
+
+
+def models_list():
+    """Return all registered models"""
+
+    if django.get_version() <= '1.7':
+        mlist = models.get_models()
+    else:
+        from django.apps import apps
+
+        mlist = apps.get_models()
+
+    mlist = filterfalse(
+        lambda m: model_settings(m, 'sync').get('ignore', False), mlist)
+
+    return mlist
