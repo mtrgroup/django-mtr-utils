@@ -35,5 +35,4 @@ setup(
     ],
     keywords=('django', 'helpers', 'mixins', 'shortcuts'),
     install_requires=('python-slugify', 'django-mptt'),
-    dependency_links=('git+https://github.com/mtrgroup/django-pure-pagination#egg=django-pure-pagination@master#egg=django-pure-pagination',),
 )

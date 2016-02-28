@@ -17,4 +17,3 @@ django-debug-toolbar
 # requirements
 python-slugify
 django-mptt
-git+git://github.com/mtrgroup/django-pure-pagination#egg=django-pure-pagination
