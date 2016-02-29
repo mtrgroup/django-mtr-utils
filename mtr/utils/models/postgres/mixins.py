@@ -45,15 +45,3 @@ class ImagesMixin(models.Model):
     @property
     def main_image(self):
         return self.image_list[0] if self.image_list else None
-
-    # def preview(self):
-    #     try:
-    #         thumbnail = get_thumbnail(self.main_image, '50x50')
-
-    #         return '<img src="{}" width="{}" height="{}">'.format(
-    #             thumbnail.url, thumbnail.width, thumbnail.height)
-    #     except:
-    #         return None
-    # preview.allow_tags = True
-    # preview.short_description = _('Preview')
-    # preview.admin_order_field = 'image_list'
