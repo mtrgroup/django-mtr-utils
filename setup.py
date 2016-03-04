@@ -34,5 +34,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     keywords=('django', 'helpers', 'mixins', 'shortcuts'),
-    install_requires=('python-slugify', 'django-mptt'),
+    install_requires=('python-slugify', 'django-mptt==0.8.2'),
 )
