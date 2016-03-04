@@ -180,3 +180,8 @@ def models_list():
         lambda m: model_settings(m, 'sync').get('ignore', False), mlist)
 
     return mlist
+
+
+def model_app_name(model):
+    return '{}.{}'.format(
+        model._meta.app_label, model._meta.object_name.lower())
