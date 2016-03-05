@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    mtr.utils.models
     mtr.utils.south_migrations
     mtr.utils.templatetags
 
@@ -24,6 +25,22 @@ mtr.utils.apps module
 ---------------------
 
 .. automodule:: mtr.utils.apps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mtr.utils.auth module
+---------------------
+
+.. automodule:: mtr.utils.auth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mtr.utils.basic module
+----------------------
+
+.. automodule:: mtr.utils.basic
     :members:
     :undoc-members:
     :show-inheritance:
@@ -56,22 +73,6 @@ mtr.utils.manager module
 ------------------------
 
 .. automodule:: mtr.utils.manager
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mtr.utils.models module
------------------------
-
-.. automodule:: mtr.utils.models
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mtr.utils.paginate module
--------------------------
-
-.. automodule:: mtr.utils.paginate
     :members:
     :undoc-members:
     :show-inheritance:

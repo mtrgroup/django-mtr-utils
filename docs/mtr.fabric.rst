@@ -1,13 +1,13 @@
-mtr.sphinx package
+mtr.fabric package
 ==================
 
 Submodules
 ----------
 
-mtr.sphinx.django module
-------------------------
+mtr.fabric.local module
+-----------------------
 
-.. automodule:: mtr.sphinx.django
+.. automodule:: mtr.fabric.local
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ mtr.sphinx.django module
 Module contents
 ---------------
 
-.. automodule:: mtr.sphinx
+.. automodule:: mtr.fabric
     :members:
     :undoc-members:
     :show-inheritance:

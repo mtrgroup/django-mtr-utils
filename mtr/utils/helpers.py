@@ -6,6 +6,7 @@ from functools import wraps
 import django
 
 from django.db import models
+from django.utils.encoding import smart_text
 from django.shortcuts import render
 from django.utils.six.moves import filterfalse
 from django.utils.six.moves.urllib.parse import urljoin
@@ -185,3 +186,17 @@ def models_list():
 def model_app_name(model):
     return '{}.{}'.format(
         model._meta.app_label, model._meta.object_name.lower())
+
+
+def model_choices(empty=True):
+    """Return all registered django models as choices"""
+
+    if empty:
+        yield ('', '-' * 9)
+
+    for model in models_list():
+        yield (
+            model_app_name(model),
+            smart_text('{} | {}').format(
+                model._meta.app_label.title(),
+                model._meta.verbose_name.title()))

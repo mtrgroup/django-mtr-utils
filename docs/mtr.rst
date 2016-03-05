@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    mtr.sphinx
+    mtr.fabric
     mtr.utils
 
 Module contents
