@@ -10,6 +10,7 @@ from ..translation import _
 
 class CharNullField(models.CharField):
     description = "CharField that stores NULL but returns empty string"
+
     __metaclass__ = models.SubfieldBase
 
     def to_python(self, value):

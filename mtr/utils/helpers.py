@@ -90,6 +90,8 @@ def chunks(l, n, as_list=False):
 def update_nested_dict(d, u):
     """Simple function to update nested dict"""
 
+    # TODO: needs more tests in some cases updates all dict instead of values
+
     for k, v in u.items():
         if isinstance(v, collections.Mapping):
             r = update_nested_dict(d.get(k, {}), v)
