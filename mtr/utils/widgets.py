@@ -1,7 +1,8 @@
 from django import forms
 from django.core.urlresolvers import reverse
 
-from mtr.utils.helpers import model_app_name
+from .helpers import model_app_name
+from .translation import _
 
 
 class RelatedModelWidget(forms.widgets.Widget):
@@ -30,16 +31,16 @@ class RelatedModelWidget(forms.widgets.Widget):
 
         if self.auto_add:
             action = 'data-model-autoadd'
-            action_label = 'Добавить'
+            action_label = _('Add')
         else:
             action = 'data-model-choose'
-            action_label = 'Выбрать'
+            action_label = _('Choose')
 
         return '<div data-model-info="{}"></div>' \
             '<input id="id_{}" name="{}" type="hidden" value="{}">' \
             '<a href="{}" {}>' \
             '{}</a>&nbsp;<a href="{}" data-model-edit>' \
-            'Редактировать</a>'.format(
+            '{}</a>'.format(
                 model_label, name, name, value,
                 list_url, action,
-                action_label, edit_url)
+                action_label, edit_url, _('Edit'))
