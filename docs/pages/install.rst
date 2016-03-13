@@ -8,10 +8,14 @@ Installation
 Stable version
 ==============
 
-Use pip to get latest stable version, just type as usual `pip install django-mtr-utils` or add to your `requirements.txt` file.
+Not-yet released :(
 
 Development version
 ===================
+
+Use one pip command to install package::
+
+   pip install git+https://github.com/mtrgroup/django-mtr-utils.git#egg=django-mtr-utils
 
 You can get it the latest source from our `git`_ repository::
 
