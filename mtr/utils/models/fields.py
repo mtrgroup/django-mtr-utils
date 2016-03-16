@@ -3,6 +3,28 @@ from django.db import models
 from ..translation import _
 
 
+class CharNullField(models.CharField):
+    description = "CharField that stores NULL but returns empty string"
+
+    __metaclass__ = models.SubfieldBase
+
+    def to_python(self, value):
+        if isinstance(value, models.CharField):
+            return value
+        if value is None:
+            return ''
+        else:
+            return value
+
+    def get_prep_value(self, value):
+        value = super(CharNullField, self).get_prep_value(value)
+
+        if not value:
+            return None
+        else:
+            return value
+
+
 class ManyFields(object):
 
     def __new__(cls, _field, *fields_and_labels, **params):

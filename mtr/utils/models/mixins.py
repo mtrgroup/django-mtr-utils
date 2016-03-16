@@ -8,28 +8,6 @@ from mptt.managers import TreeManager
 from ..translation import _
 
 
-class CharNullField(models.CharField):
-    description = "CharField that stores NULL but returns empty string"
-
-    __metaclass__ = models.SubfieldBase
-
-    def to_python(self, value):
-        if isinstance(value, models.CharField):
-            return value
-        if value is None:
-            return ''
-        else:
-            return value
-
-    def get_prep_value(self, value):
-        value = super(CharNullField, self).get_prep_value(value)
-
-        if not value:
-            return None
-        else:
-            return value
-
-
 class SeoMixin(models.Model):
     seo_title = models.CharField(_('title'), max_length=100, blank=True)
     seo_description = models.CharField(
@@ -60,9 +38,11 @@ class PublishedMixin(models.Model):
         _('published at'), default=timezone.now)
     published_to = models.DateTimeField(
         _('published to'), null=True, blank=True)
-    published = models.BooleanField(_('published (available)'), default=True)
+    published = models.BooleanField(
+        _('published (available)'), default=True)
 
-    objects = PublishedManager()
+    objects = models.Manager()
+    published_objects = PublishedManager()
 
     class Meta:
         abstract = True
@@ -71,7 +51,8 @@ class PublishedMixin(models.Model):
 
 
 class TreePublishedMixin(PublishedMixin):
-    objects = TreePublishedManager()
+    objects = models.TreeManager()
+    published_objects = TreePublishedManager()
 
     class Meta:
         abstract = True
