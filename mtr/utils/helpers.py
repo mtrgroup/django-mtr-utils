@@ -8,7 +8,7 @@ import django
 from django.db import models
 from django.utils.encoding import smart_text
 from django.shortcuts import render
-from django.utils.six.moves import filterfalse
+from django.utils.six.moves import filterfalse, range
 from django.utils.six.moves.urllib.parse import urljoin
 from django.core.exceptions import PermissionDenied
 
