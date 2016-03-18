@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.core.urlresolvers import reverse
 
@@ -44,3 +46,43 @@ class RelatedModelWidget(forms.widgets.Widget):
                 model_label, name, name, value,
                 list_url, action,
                 action_label, edit_url, _('Edit'))
+
+
+# REFACTOR: for all selectboxes
+class SelectizeCategoryWidget(forms.widgets.Widget):
+
+    class Media:
+        js = (
+            'mtr/utils/vendor/selectize/js/selectize.min.js',
+            'mtr/utils/widgets/selectize.js'
+        )
+        css = {
+            'screen': ('mtr/utils/vendor/selectize/css/selectize.suit.css',)
+        }
+
+    def __init__(self, model, attrs=None, params=None):
+        self.params = params or {}
+        self.model = model
+
+        super().__init__(attrs)
+
+    def render(self, name, value, attrs=None):
+        # TODO: use django rest framework
+
+        resource = reverse('utils:model_resource', args=(
+            model_app_name(self.model),))
+        params = json.dumps(self.params)
+        option = ''
+        if value:
+            item = self.model.objects.get(id=value)
+            option = '<option name="{}">{}</option>'.format(
+                value, item.get_name_path())
+
+        return """
+            <div class="selectize-widget">
+            <select id="id_{0}" name="{0}" value="{1}"
+                data-selectize-select="{2}"
+                data-params='{3}'
+                placeholder="Введите категорию...">
+                {4}
+            </select></div>""".format(name, value, resource, params, option)
