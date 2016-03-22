@@ -5,6 +5,7 @@ from slugify import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
+from .fields import CharNullField
 from ..translation import _
 
 
@@ -51,7 +52,7 @@ class PublishedMixin(models.Model):
 
 
 class TreePublishedMixin(PublishedMixin):
-    objects = models.TreeManager()
+    objects = TreeManager()
     published_objects = TreePublishedManager()
 
     class Meta:
