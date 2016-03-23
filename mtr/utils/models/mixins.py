@@ -159,6 +159,9 @@ class TreeParentMixin(
         TreePublishedMixin, PositionRelatedMixin):
     POSITION_RELATED_FIELD = 'parent'
 
+    RELATED_COUNT_TO = None
+    RELATED_COUNT_MANAGER = 'published_objects'
+
     SLUG_PREFIXED_PARENT = 'parent'
     SLUG_PREFIXED_DUBLICATE = True
 
@@ -169,9 +172,6 @@ class TreeParentMixin(
     class Meta:
         abstract = True
 
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
-
         ordering = ('position',)
 
         unique_together = ('slug', 'parent')
@@ -181,3 +181,27 @@ class TreeParentMixin(
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        recalc = kwargs.pop('recalc', True)
+
+        super().save(*args, **kwargs)
+
+        if recalc and self.RELATED_COUNT_TO:
+            self.calculate_related_count()
+
+    def calculate_related_count(self):
+        curr_level = None
+
+        for category in reversed(self.get_family()):
+            if curr_level is None:
+                curr_level = category.level
+
+            if curr_level > category.level:
+                count = category.children \
+                    .aggregate(models.Sum('count'))['count__sum']
+            else:
+                count = getattr(category, self.RELATED_COUNT_TO)
+                count = getattr(count.model, self.RELATED_COUNT_MANAGER) \
+                    .filter(category=category).count()
+            self.__class__.objects.filter(id=category.id).update(count=count)
