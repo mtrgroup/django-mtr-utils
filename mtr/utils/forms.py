@@ -22,6 +22,11 @@ class SelectizeCategoryFormMixin(object):
 
         params = {}
 
+        # TODO: move to field
+
+        if 'linked_to' not in self.fields:
+            return
+
         if self.instance is not None:
             params['group_id'] = self.instance.group_id
 
