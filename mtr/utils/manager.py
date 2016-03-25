@@ -35,6 +35,8 @@ class BaseManager(object):
         to instance, dict"""
 
         def decorator(func):
+            # TODO: refactor, too complicated
+
             key = type_name
             values = self._registered.get(key, OrderedDict())
             outer = None
@@ -102,6 +104,7 @@ class BaseManager(object):
 
             self._imported = True
 
+    def import_from_app_list(self, app_list):
+        # TODO: cover from django app list
 
-class TemplateContextManager(BaseManager):
-    pass
+        pass

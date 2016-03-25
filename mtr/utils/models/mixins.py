@@ -179,6 +179,11 @@ class TreeParentMixin(
     class MPTTMeta:
         order_insertion_by = ('position',)
 
+    class Settings:
+        position = {'related': 'parent'}
+        count = {'related': None, 'manager': 'published_objects'}
+        slug = {'related': 'parent', 'dublicate': True}
+
     def __str__(self):
         return self.name
 
