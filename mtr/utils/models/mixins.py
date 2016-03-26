@@ -19,15 +19,19 @@ class SeoMixin(models.Model):
         abstract = True
 
 
-class PublishedManager(models.Manager):
-
-    def get_queryset(self):
-        return super().get_queryset() \
-            .filter(
+class PublishedQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(
                 published=True, published_at__lt=timezone.now()) \
             .filter(
                 models.Q(published_to__gt=timezone.now()) |
                 models.Q(published_to=None))
+
+
+class PublishedManager(models.Manager):
+
+    def get_queryset(self):
+        return PublishedQuerySet(self.model, using=self._db)
 
 
 class TreePublishedManager(TreeManager, PublishedManager):
@@ -42,7 +46,7 @@ class PublishedMixin(models.Model):
     published = models.BooleanField(
         _('published (available)'), default=True)
 
-    objects = models.Manager()
+    objects = models.from_queryset(PublishedQuerySet)()
     published_objects = PublishedManager()
 
     class Meta:
