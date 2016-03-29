@@ -1,12 +1,12 @@
 from django.utils.translation import gettext_lazy, gettext
 
-from .settings import GETTEXT
+from .settings import SETTINGS
 
 
 def make_prefixed_string(func, makeprefix, makeformat=None):
     """Shortcut for prefixing (formating) string passed to function"""
 
-    makeformat = makeformat or GETTEXT['FORMAT']
+    makeformat = makeformat or SETTINGS['gettext']['format']
 
     def inner(string, prefix=None, cformat=None):
         """String prefixed before passed in func"""

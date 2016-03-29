@@ -12,13 +12,13 @@ from django.utils.six.moves import filterfalse, range
 from django.utils.six.moves.urllib.parse import urljoin
 from django.core.exceptions import PermissionDenied
 
-from .settings import THEMES, MEDIA_URL, DOMAIN_URL
+from .settings import SETTINGS
 
 
-def themed(template, version_subdirectory=False, settings=THEMES):
+def themed(template, version_subdirectory=False, settings=SETTINGS):
     """Changing template themes by setting THEME_PATH and django version"""
 
-    path = os.path.join(settings['DIR'], settings['THEME'])
+    path = os.path.join(settings['themes']['dir'], settings['themes']['theme'])
 
     if version_subdirectory:
         path = os.path.join(path, django.get_version()[:3])
@@ -45,7 +45,7 @@ def render_to(template, *args, **kwargs):
             response = f(request, *args, **kwargs)
             if isinstance(response, dict):
                 new_template = template
-                if decorator_kwargs.pop('themed', THEMES['USE_IN_RENDER']):
+                if decorator_kwargs.pop('themed', SETTINGS['themes']['use_in_render']):
                     new_template = themed(template)
 
                 return render(

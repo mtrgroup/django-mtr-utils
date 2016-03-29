@@ -16,16 +16,6 @@ def getattr_with_prefix(prefix, name, default):
 
     return default
 
-THEMES = getattr_with_prefix('THEMES', 'SETTINGS', {
-    'DIR': 'themes',
-    'THEME': 'suit',
-    'USE_IN_RENDER': True,
-})
-
-GETTEXT = getattr_with_prefix('GETTEXT', 'SETTINGS', {
-    'FORMAT': '{}:{}',
-})
-
 SETTINGS = getattr_with_prefix('UTILS', 'SETTINGS', {
     'template': {
         'apps': [],
@@ -42,8 +32,3 @@ SETTINGS = getattr_with_prefix('UTILS', 'SETTINGS', {
     },
     'domain': 'http://localhost/'
 })
-
-DOMAIN_URL = getattr(settings, 'DOMAIN_URL', 'http://localhost/')
-if not DOMAIN_URL.endswith('/'):
-    DOMAIN_URL = '{}/'.format(DOMAIN_URL)
-MEDIA_URL = settings.MEDIA_URL
