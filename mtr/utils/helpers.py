@@ -6,26 +6,26 @@ from functools import wraps
 import django
 
 from django.db import models
+from django.conf import settings
 from django.utils.encoding import smart_text
 from django.shortcuts import render
 from django.utils.six.moves import filterfalse, range
 from django.utils.six.moves.urllib.parse import urljoin
 from django.core.exceptions import PermissionDenied
 
-from .settings import SETTINGS
+from .settings import THEMES, DOMAIN_URL
 
 
-def themed(template, version_subdirectory=False, settings=SETTINGS):
+def themed_path(
+        template, version_subdirectory=False,
+        base_dir=THEMES['base_dir'],
+        theme=THEMES['theme']):
     """Changing template themes by setting THEME_PATH and django version"""
 
-    path = os.path.join(settings['themes']['dir'], settings['themes']['theme'])
+    path = os.path.join(base_dir, theme)
 
     if version_subdirectory:
         path = os.path.join(path, django.get_version()[:3])
-
-    # TODO: add check if file exist if not try use base theme
-    # if base not found use fall back, then raise error with original
-    # template provided in function
 
     return os.path.join(path, template)
 
@@ -36,6 +36,10 @@ def render_to(template, *args, **kwargs):
 
     decorator_kwargs = kwargs
 
+    # TODO: add check if file exist if not try use base theme
+    # if base not found use fall back, then raise error with original
+    # template provided in function
+
     # outer decorator
     def decorator(f):
 
@@ -45,8 +49,9 @@ def render_to(template, *args, **kwargs):
             response = f(request, *args, **kwargs)
             if isinstance(response, dict):
                 new_template = template
-                if decorator_kwargs.pop('themed', SETTINGS['themes']['use_in_render']):
-                    new_template = themed(template)
+                if decorator_kwargs.pop(
+                        'themed', THEMES['use_in_render']):
+                    new_template = themed_path(template)
 
                 return render(
                     request, new_template,
@@ -58,11 +63,11 @@ def render_to(template, *args, **kwargs):
     return decorator
 
 
-def make_prefixed_themed(prefix):
+def make_prefixed_themed_path(prefix):
     """Shortcut for prefixing template dir path"""
 
     def inner(template, version_subdirectory=False):
-        return themed(
+        return themed_path(
             os.path.join(prefix, template),
             version_subdirectory=version_subdirectory)
 
@@ -157,16 +162,16 @@ def find_dublicates(model, fields):
     return model.objects.filter(id__in=map(lambda d: d['max_id'], duplicates))
 
 
-def url_with_domain(path):
+def absolute_url(path):
     """Return url with domain in settings for inner functions"""
 
     return urljoin(DOMAIN_URL, path.lstrip('/'))
 
 
-def url_with_media(path):
+def relative_media_url(path):
     """Return url with domain in settings for inner functions"""
 
-    return urljoin(MEDIA_URL, path.lstrip('/'))
+    return urljoin(settings.MEDIA_URL, path.lstrip('/'))
 
 
 def models_list():

@@ -16,6 +16,8 @@ def getattr_with_prefix(prefix, name, default):
 
     return default
 
+DOMAIN_URL = getattr(settings, 'DOMAIN_URL', 'http://localhost/')
+
 SETTINGS = getattr_with_prefix('UTILS', 'SETTINGS', {
     'template': {
         'apps': [],
@@ -25,10 +27,11 @@ SETTINGS = getattr_with_prefix('UTILS', 'SETTINGS', {
         'format': '{}:{}',
     },
     'themes': {
-        'dir': 'themes',
+        'base_dir': 'themes',
         'theme': 'default',
         'use_in_render': True,
         'fallback_to_default': True
     },
-    'domain': 'http://localhost/'
 })
+
+THEMES = SETTINGS['themes']
