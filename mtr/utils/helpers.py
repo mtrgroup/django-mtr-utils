@@ -1,4 +1,5 @@
 import os
+import types
 import collections
 
 from functools import wraps
@@ -207,3 +208,24 @@ def model_choices(empty=True):
             smart_text('{} | {}').format(
                 model._meta.app_label.title(),
                 model._meta.verbose_name.title()))
+
+
+class MethodWrapper:
+    """
+    Used for exposing private and long methods to simple class with
+    public human readable names. For example using them in django templates
+    """
+
+    def __init__(self, instance, bind=None):
+        self.instance = instance
+        self.bind = bind or []
+
+        for template, names in bind:
+            for name in names:
+                self._bind_method(template.format(name), name)
+
+    def _bind_method(self, m_from, m_to):
+        def func(self, *args, **kwargs):
+            return getattr(self.instance, m_from)(*args, **kwargs)
+
+        setattr(self, m_to, types.MethodType(func, self))
