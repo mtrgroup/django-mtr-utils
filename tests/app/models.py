@@ -9,9 +9,11 @@ from django.utils import six
 from django.utils.six.moves import range
 from django.db import models
 
+from mtr.utils.models.mixins import PublishedMixin
+
 
 @python_2_unicode_compatible
-class Office(models.Model):
+class Office(PublishedMixin):
     office = models.CharField('office', max_length=255)
     address = models.CharField('address', max_length=255)
 

@@ -31,11 +31,13 @@ class PublishedQuerySet(models.QuerySet):
 class PublishedManager(models.Manager):
 
     def get_queryset(self):
-        return PublishedQuerySet(self.model, using=self._db)
+        return PublishedQuerySet(self.model, using=self._db).published()
 
 
 class TreePublishedManager(TreeManager, PublishedManager):
-    pass
+
+    def get_queryset(self):
+        return PublishedQuerySet(self.model, using=self._db).published()
 
 
 class PublishedMixin(models.Model):
@@ -46,7 +48,7 @@ class PublishedMixin(models.Model):
     published = models.BooleanField(
         _('published (available)'), default=True)
 
-    objects = models.from_queryset(PublishedQuerySet)()
+    objects = models.Manager.from_queryset(PublishedQuerySet)()
     published_objects = PublishedManager()
 
     class Meta:
