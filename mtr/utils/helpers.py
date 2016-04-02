@@ -16,6 +16,8 @@ from django.core.exceptions import PermissionDenied
 
 from .settings import THEMES, DOMAIN_URL
 
+# TODO: separate to smaller libs
+
 
 def themed_path(
         template, version_subdirectory=False,

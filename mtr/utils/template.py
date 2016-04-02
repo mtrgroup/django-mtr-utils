@@ -8,4 +8,3 @@ class ContextManager(BaseManager):
 
 manager = ContextManager()
 manager.import_modules(SETTINGS['template']['apps'])
-# manager.import_from_app_list()
