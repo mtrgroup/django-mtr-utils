@@ -35,3 +35,4 @@ SETTINGS = getattr_with_prefix('UTILS', 'SETTINGS', {
 })
 
 THEMES = SETTINGS['themes']
+GETTEXT = SETTINGS['gettext']
