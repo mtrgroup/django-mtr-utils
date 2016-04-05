@@ -29,7 +29,7 @@ class TranslateNode(Node):
     def render(self, context):
         i18n_prefix = self.request.resolve(context).resolver_match.app_name
         i18n_prefix = context.get('__i18n_prefix', i18n_prefix)
-        self.filter_expression.var.literal = GETTEXT['FORMAT'].format(
+        self.filter_expression.var.literal = GETTEXT['format'].format(
             i18n_prefix, self.filter_expression.var.literal)
         self.filter_expression.var.translate = not self.noop
         if self.message_context:
@@ -175,7 +175,7 @@ class BlockTranslateNode(Node):
         singular, vars = self.render_token_list(self.singular)
         i18n_prefix = self.request.resolve(context).resolver_match.app_name
         i18n_prefix = context.get('__i18n_prefix', i18n_prefix)
-        singular = GETTEXT['FORMAT'].format(i18n_prefix, singular)
+        singular = GETTEXT['format'].format(i18n_prefix, singular)
         if self.plural and self.countervar and self.counter:
             count = self.counter.resolve(context)
             context[self.countervar] = count
