@@ -4,17 +4,12 @@ from __future__ import unicode_literals
 
 import random
 
-import django
-
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import six
 from django.utils.six.moves import range
 from django.db import models
 
-if django.get_version() < '1.7':
-    from mtr.utils.models.compat import PublishedMixin
-else:
-    from mtr.utils.models.mixins import PublishedMixin
+from mtr.utils.models.mixins import PublishedMixin
 
 
 @python_2_unicode_compatible
