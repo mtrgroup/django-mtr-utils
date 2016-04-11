@@ -20,7 +20,7 @@ class Office(PublishedMixin):
     def __str__(self):
         return self.office
 
-    class Meta:
+    class Meta(PublishedMixin.Meta):
         verbose_name = 'office'
         verbose_name_plural = 'offices'
 

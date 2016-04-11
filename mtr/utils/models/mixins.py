@@ -56,6 +56,13 @@ class PublishedMixin(models.Model):
         index_together = ('published_at', 'published_to', 'published')
         ordering = ('-published_at', 'published')
 
+    def is_published(self):
+        now = timezone.now()
+        published = self.published and self.published_at < now
+        if self.published_to:
+            published = published and self.published_to < now
+        return published
+
 
 class TreePublishedMixin(PublishedMixin):
     objects = TreeManager()
