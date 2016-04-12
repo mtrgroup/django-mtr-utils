@@ -223,3 +223,13 @@ class TreeParentMixin(
                 count = getattr(count.model, self.RELATED_COUNT_MANAGER) \
                     .filter(category=category).count()
             self.__class__.objects.filter(id=category.id).update(count=count)
+
+
+class ValidateOnSaveMixin(object):
+    # https://www.xormedia.com/django-model-validation-on-save/
+
+    def save(self, force_insert=False, force_update=False, **kwargs):
+        if not (force_insert or force_update):
+            self.full_clean()
+        super(ValidateOnSaveMixin, self).save(
+            force_insert, force_update, **kwargs)
