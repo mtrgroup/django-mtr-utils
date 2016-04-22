@@ -4,7 +4,8 @@ import django
 
 
 # placeholder for gettext
-def _(s): return s
+def _(s):
+    return s
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 

@@ -71,14 +71,11 @@ def manage(command, coverage=None):
 def test(coverage=False):
     """Test listed apps"""
 
-    if django.get_version() >= '1.7':
-        apps = []
-        apps.extend(env.vars['project']['apps'])
-        apps.extend(env.vars['apps'])
-        test_apps = ' '.join(map(lambda app: '{}.tests'.format(app), apps))
-        command = "test {} --pattern='*.py'".format(test_apps)
-    else:
-        command = "test --pattern='*.py'"
+    apps = []
+    apps.extend(env.vars['project']['apps'])
+    apps.extend(env.vars['apps'])
+    test_apps = ' '.join(map(lambda app: '{}.tests'.format(app), apps))
+    command = "test {} --pattern='*.py'".format(test_apps)
 
     if coverage:
         coverage = "coverage run --omit=*.virtualenvs/*," \
