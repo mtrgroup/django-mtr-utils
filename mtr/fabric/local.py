@@ -1,8 +1,6 @@
 import os
 import sys
 
-import django
-
 from fabric.api import local, task, lcd, settings, env
 from babel.messages.pofile import read_po, write_po
 
@@ -155,13 +153,7 @@ def locale(action='make', lang='en'):
 def migrate():
     """Simple data migration management"""
 
-    if django.get_version() >= '1.7':
-        manage('makemigrations')
-    else:
-        for app in env.vars['apps'] + env.vars['project']['apps']:
-            manage('schemamigration --initial {}'.format(app.split('.')[-1]))
-        manage('syncdb --noinput')
-
+    manage('makemigrations')
     manage('migrate')
 
 
@@ -178,17 +170,10 @@ def recreate(username='app', password='app'):
 
     for app in apps:
         with lcd(os.path.join(*app.split('.'))), settings(warn_only=True):
-            if django.get_version() >= '1.7':
-                local('rm -f ./migrations/*.py')
-                local('touch ./migrations/__init__.py')
-            else:
-                local('rm -f ./south_migrations/*.py')
-                local('touch ./south_migrations/__init__.py')
+            local('rm -f ./migrations/*.py')
+            local('touch ./migrations/__init__.py')
     with lcd(env.vars['project']['dir']):
-        if django.get_version() >= '1.7':
-            local('rm -f db.sqlite3')
-        else:
-            local('rm -rf olddb.sqlite3')
+        local('rm -f db.sqlite3')
 
     migrate()
 
