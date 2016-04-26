@@ -20,9 +20,9 @@ class SeoMixin(models.Model):
 
 
 class PublishedQuerySet(models.QuerySet):
+
     def published(self):
-        return self.filter(
-                published=True, published_at__lt=timezone.now()) \
+        return self.filter(published=True, published_at__lt=timezone.now()) \
             .filter(
                 models.Q(published_to__gt=timezone.now()) |
                 models.Q(published_to=None))
@@ -72,7 +72,9 @@ class TreePublishedMixin(PublishedMixin):
         abstract = True
 
 
-class CreatedAtUpdatedAtMixin(models.Model):
+class TimeStampedMixin(models.Model):
+    # TODO: add custom naming mixin
+
     created_at_in_db = models.DateTimeField(
         _('created at'), auto_now_add=True, null=True)
     created_at = models.DateTimeField(
