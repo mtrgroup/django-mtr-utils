@@ -1,5 +1,5 @@
 # base
-django<1.8
+django
 south
 
 # for development
