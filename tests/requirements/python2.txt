@@ -13,7 +13,7 @@ celery
 babel
 django-rq
 django-modeltranslation
-django-debug-toolbar<1.4
+django-debug-toolbar
 
 # requirements
 python-slugify
