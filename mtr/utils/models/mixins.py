@@ -235,3 +235,12 @@ class ValidateOnSaveMixin(object):
             self.full_clean()
         super(ValidateOnSaveMixin, self).save(
             force_insert, force_update, **kwargs)
+
+
+class StyleMixin(models.Model):
+    # TODO: ->
+    # render_string (idea from logger)
+    # and one to many settings with colors and render params
+
+    class Meta:
+        abstract = True
