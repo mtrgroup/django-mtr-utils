@@ -211,6 +211,7 @@ class TreeParentMixin(
             self.calculate_related_count()
 
     def calculate_related_count(self):
+
         curr_level = None
 
         for category in reversed(self.get_family()):
@@ -228,7 +229,6 @@ class TreeParentMixin(
 
 
 class ValidateOnSaveMixin(object):
-    # https://www.xormedia.com/django-model-validation-on-save/
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         if not (force_insert or force_update):

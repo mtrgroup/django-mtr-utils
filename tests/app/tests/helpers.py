@@ -13,5 +13,3 @@ class HelpersTest(TestCase):
         self.assertEqual(
             '/media/test/somemedia.jpeg',
             relative_media_url('test/somemedia.jpeg'))
-
-        # BUG: real settings
