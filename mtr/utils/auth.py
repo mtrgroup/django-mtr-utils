@@ -35,6 +35,8 @@ class CachedModelBackend(ModelBackend):
 
 def expire_user_by_id(sender, **kwargs):
     user = kwargs['instance']
+
     cache.delete(user_by_id_key(user.id))
+
 post_save.connect(expire_user_by_id, UserModel)
 post_delete.connect(expire_user_by_id, UserModel)

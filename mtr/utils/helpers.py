@@ -212,7 +212,7 @@ def model_choices(empty=True):
                 model._meta.verbose_name.title()))
 
 
-class MethodWrapper:
+class MethodWrapper(object):
     """
     Used for exposing private and long methods to simple class with
     public human readable names. For example using them in django templates
