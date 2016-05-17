@@ -136,8 +136,3 @@ RQ_QUEUES = {
         'DEFAULT_TIMEOUT': 360,
     },
 }
-
-SYNC_SETTINGS = {
-    'ACTIONS': ['mtr.sync.lib.actions', 'app.sync'],
-    'BROKER': 'celery',
-}

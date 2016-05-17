@@ -39,9 +39,7 @@ class CopyActionMixin(object):
                 context.settings_id = item.id
                 context.save()
 
-        self.message_user(
-                request,
-                _('Copies successfully created'))
+        self.message_user(request, _('Copies successfully created'))
     copy_object.short_description = _('Create a copy of settings')
 
 
