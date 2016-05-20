@@ -180,15 +180,11 @@ def relative_media_url(path):
 def models_list():
     """Return all registered models"""
 
-    if django.get_version() <= '1.7':
-        mlist = models.get_models()
-    else:
-        from django.apps import apps
+    from django.apps import apps
 
-        mlist = apps.get_models()
-
-    mlist = filterfalse(
-        lambda m: model_settings(m, 'sync').get('ignore', False), mlist)
+    mlist = apps.get_models()
+    mlist = (m for m in mlist
+             if model_settings(m, 'sync').get('ignore', False))
 
     return mlist
 
